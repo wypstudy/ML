@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 def f(TrainingMatrix, TrainingResult, TestMatrix):
   theta = []
   for i in range(Size):
@@ -20,6 +22,6 @@ def f(TrainingMatrix, TrainingResult, TestMatrix):
         theta[k] += rate * error_sum * TrainingMatrix[j][k]
 
   ans = []
-  
+
   return ans
 
