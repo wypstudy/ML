@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from numpy import *
 
 def f(TrainingMatrix, TrainingResult, TestMatrix):
-  theta = []
+  theta = [[]]
   for i in range(Size):
-    theta.append(0)
+    theta[0].append(0)
   loss = 1000.0
   rate = 0.01
   RowSize = len(TrainingMatrix)
@@ -16,12 +17,10 @@ def f(TrainingMatrix, TrainingResult, TestMatrix):
     for j in range(RowSize):
       h = 0.0
       for k in range(ColSize):
-        h += TrainingMatrix[j][k] * theta[k]
+        h += TrainingMatrix[j][k] * theta[0][k]
       error_sum = TrainingResult[j] - h
       for k in range(ColSize):
-        theta[k] += rate * error_sum * TrainingMatrix[j][k]
+        theta[0][k] += rate * error_sum * TrainingMatrix[j][k]
 
-  ans = []
-
-  return ans
+  return matrix(TestMatrix) * matrix(theta)
 
