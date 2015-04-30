@@ -1,41 +1,34 @@
 # -*- coding: utf-8 -*-
-from numpy import *
+import numpy
 import math
 
-def f(TrainingMatrix, TrainingResult, TestMatrix):
+def f(TrainingMatrix, TrainingResult, TestMatrix, TrainTime, TrainRate):
   RowSize = len(TrainingMatrix)
   ColSize = len(TrainingMatrix[0])
-  oldTheta = []
+  TrainingMatrix = numpy.array(TrainingMatrix)
+  TrainingResult = numpy.array(TrainingResult)
   theta = []
   for i in range(ColSize):
-    theta.append(0)
-  rate = 0.000001
+    theta.append(0.0)
+  oldTheta = numpy.array(theta)
+  theta = numpy.array(theta)
+  rate = TrainRate
   loss = []
 
-  for k in range(10000):
-    err = []
-    jTheta = []
-    hs = 0
-    for j in range(RowSize):
-      err.append(0.0)
-      for i in range(ColSize):
-        err[hs] += TrainingMatrix[j][i] * theta[i]
-      err[hs] -= TrainingResult[j]
-      hs += 1
+  for k in range(TrainTime):
+    err = TrainingMatrix.dot(theta) - TrainingResult
 
     loss.append(reduce(lambda x, y: x + y, map(lambda x: abs(x), err)))
     if k > 0:
       if loss[k] < loss[k-1]:
         oldTheta = theta
-      if loss[k] >= loss[k -1]:
+      if loss[k] >= loss[k-1]:
         print k
         break
     print "iterative " + str(k) + " loss = " + str(loss[k])
 
     for i in range(ColSize):
-      jTheta = 0.0
-      for j in range(RowSize):
-        jTheta += err[j] * TrainingMatrix[j][i]
+      jTheta = err.dot(TrainingMatrix[0:RowSize, i])
       theta[i] = theta[i] - rate * jTheta
 
 
