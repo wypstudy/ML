@@ -2,7 +2,4 @@
 # Author : banehallow
 # Email  : 1140664142@qq.com
 
-import Func
-import Regression
-import Test
-import Classification
+import LDAC
